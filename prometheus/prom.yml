@@ -6,7 +6,7 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: sfb-api
+  - job_name: sfb-api-devnet
     metrics_path: /actuator/prometheus
     basic_auth:
       username: ${SPRING_METRICS_USERNAME}
