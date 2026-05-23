@@ -8,10 +8,10 @@ USER root
 
 ENTRYPOINT ["/bin/sh", "-c"]
 
-CMD 'test -n "$SPRING_METRICS_USERNAME" || { echo "SPRING_METRICS_USERNAME is missing"; exit 1; }; \
-     test -n "$SPRING_METRICS_PASSWORD" || { echo "SPRING_METRICS_PASSWORD is missing"; exit 1; }; \
-     printf "%s" "$SPRING_METRICS_USERNAME" > /tmp/prometheus_username && \
-     printf "%s" "$SPRING_METRICS_PASSWORD" > /tmp/prometheus_password && \
+CMD ["test -n \"$SPRING_METRICS_USERNAME\" || { echo \"SPRING_METRICS_USERNAME is missing\"; exit 1; }; \
+     test -n \"$SPRING_METRICS_PASSWORD\" || { echo \"SPRING_METRICS_PASSWORD is missing\"; exit 1; }; \
+     printf \"%s\" \"$SPRING_METRICS_USERNAME\" > /tmp/prometheus_username && \
+     printf \"%s\" \"$SPRING_METRICS_PASSWORD\" > /tmp/prometheus_password && \
      exec /bin/prometheus \
        --config.file=/etc/prometheus/prom.yml \
-       --storage.tsdb.path=/prometheus'
+       --storage.tsdb.path=/prometheus"]
