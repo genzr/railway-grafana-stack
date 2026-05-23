@@ -6,14 +6,14 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: sfb-api-devnet
+  - job_name: sfb-api-mainnet
     metrics_path: /actuator/prometheus
     basic_auth:
       username_file: /tmp/prometheus_username
       password_file: /tmp/prometheus_password    
     static_configs:
       - targets:
-        - sfb-api-service.railway.internal:8080
+        - authentic-enchantment.railway.internal:8080
 
   # - job_name: 'example_api'
   #   scheme: http
