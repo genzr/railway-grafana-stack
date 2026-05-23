@@ -10,7 +10,8 @@ scrape_configs:
     metrics_path: /actuator/prometheus
     basic_auth:
       username_file: /tmp/prometheus_username
-      password_file: /tmp/prometheus_password    static_configs:
+      password_file: /tmp/prometheus_password    
+    static_configs:
       - targets:
         - sfb-api-service.railway.internal:8080
 
