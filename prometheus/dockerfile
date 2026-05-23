@@ -5,5 +5,12 @@ FROM prom/prometheus:${VERSION}
 # Copy the prom.yml configuration file to the container
 COPY prom.yml /etc/prometheus/prom.yml
 
-# Command to run Prometheus
-CMD ["--config.file=/etc/prometheus/prom.yml", "--storage.tsdb.path=/prometheus"]
+# Switch to root so we can create runtime secret files, then run Prometheus
+USER root
+
+CMD sh -c 'printf "%s" "$SPRING_METRICS_USERNAME" > /tmp/prometheus_username && \
+           printf "%s" "$SPRING_METRICS_PASSWORD" > /tmp/prometheus_password && \
+           chown nobody:nobody /tmp/prometheus_username /tmp/prometheus_password && \
+           exec /bin/prometheus \
+             --config.file=/etc/prometheus/prom.yml \
+             --storage.tsdb.path=/prometheus'
