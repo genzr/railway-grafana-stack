@@ -9,10 +9,10 @@ scrape_configs:
   - job_name: sfb-api
     metrics_path: /actuator/prometheus
     basic_auth:
-    username: ${SPRING_METRICS_USERNAME}
-    password: ${SPRING_METRICS_PASSWORD}
+      username: ${SPRING_METRICS_USERNAME}
+      password: ${SPRING_METRICS_PASSWORD}
     static_configs:
-    - targets:
+      - targets:
         - sfb-api-service.railway.internal:8080
 
   # - job_name: 'example_api'
